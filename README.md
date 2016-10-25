@@ -5,7 +5,8 @@
 	
 2. Integrate with JWT token and barryvdh/laravel-cors 
 	JWT token used for HTTP Authentication
-	varryvdh/laravel-cors used for fixed CORP problerms.
+	barryvdh/laravel-cors used for fixed CORS problerms.
+	
 3. test phpunit & postman
 	export PATH=./vendor/bin:$PATH
 	phpunit
@@ -25,10 +26,15 @@
 6. declare routes for both user and note
    declare jwt middleware for every request, except login request.
    ex:
+   
     $app->post('/login', 'AuthController@login');
+	
 	$app->get('/', function () use ($app) {
-		return $app->version() . ' with Docker is running...----';});
+		return $app->version() . ' with Docker is running...----';
+	});
+	
 	$app->group(['middleware' =>'jwt', 'namespace' =>'App\Http\Controllers'], function() use($app){
+	
 		$app->get('/notes', 'NotesController@index');
 		$app->get('/notes/{id:[\d]+}', 'NotesController@show');
 		$app->delete('/notes/{id:[\d]+}', 'NotesController@destroy');
@@ -51,3 +57,6 @@
 8. support JSON for request and response, notes access is restricted to the user.
    Use lumen ORM to build table and CRUD operation.
    
+9. useful and thanks for github links:
+	https://github.com/barryvdh/laravel-cors
+	https://github.com/tymondesigns/jwt-auth
