@@ -11,12 +11,25 @@
 |
 */
 $app->post('/login', 'AuthController@login');
-$app->post('/logout', 'AuthController@logout');
 $app->get('/', function () use ($app) {
 //dd("Hello World \n");
 return $app->version() . ' with Docker is running...----';
 //	phpinfo();
 });
+$app->group(['middleware' =>'jwt', 'namespace' =>'App\Http\Controllers'], function() use($app){
+    $app->get('/notes', 'NotesController@index');
+    $app->get('/notes/{id:[\d]+}', 'NotesController@show');
+    $app->delete('/notes/{id:[\d]+}', 'NotesController@destroy');
+    $app->post('/notes', 'NotesController@store');
+    $app->put('/notes/{id:[\d]+}', 'NotesController@update');
 
+    $app->get('/users', 'UsersController@index');
+    $app->get('/users/{id:[\d]+}', 'UsersController@show');
+    $app->delete('/users/{id:[\d]+}', 'UsersController@destroy');
+    $app->post('/users', 'UsersController@store');
+    $app->put('/users/{id:[\d]+}', 'UsersController@update');
+
+    $app->post('/logout', 'AuthController@logout');
+});
 
 
