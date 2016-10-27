@@ -1,5 +1,18 @@
 # notesPHP
 
+The project(notesDemoPHP) uses Lumen and MySql to build a RESTful API. Lumen is a mircro-framework to provide RESTful API and full Eloquent ORM to manage tables in database.
+
+The design process is from database to classes and from classes to controller.
+
+From the document of new-hire-coding-chanllenge-php.docx, one user can have many notes and note access should be restricted the owner of the note.
+
+For that case, I have my database design method. I design two tables in the database, user and note. The table note has one foreign key uid to reference table user. The relationship bewteen note and user is many-to-one. 
+
+From the database design, There are two classes in this project, Note.php and User.php in notesDemoPHP. many-to-one relationship is declared in the Note.php.
+notesDemoPHP provides CRUD operation for both user and notes.
+
+Following is the process:
+
 1. build lumen project notesDemoPHP
 	composer create-project laravel/lumen=5.2.* usernotes --prefer-dist
 	
@@ -60,3 +73,16 @@
 9. useful and thanks for github links:
 	https://github.com/barryvdh/laravel-cors
 	https://github.com/tymondesigns/jwt-auth
+	
+10. Demonstration:
+   GET 		http://localhost:8090/notesDemoPHP/public/notes
+   GET 		http://localhost:8090/notesDemoPHP/public/notes/{id}
+   DELETE 	http://localhost:8090/notesDemoPHP/public/notes/{id}
+   PUT 		http://localhost:8090/notesDemoPHP/public/notes/{id}
+   POST 	http://localhost:8090/notesDemoPHP/public/notes
+   
+   GET 		http://localhost:8090/notesDemoPHP/public/users
+   GET 		http://localhost:8090/notesDemoPHP/public/users/{id}
+   DELETE 	http://localhost:8090/notesDemoPHP/public/users/{id}
+   PUT 		http://localhost:8090/notesDemoPHP/public/users/{id}
+   POST 	http://localhost:8090/notesDemoPHP/public/users
